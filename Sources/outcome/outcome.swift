@@ -1,25 +1,27 @@
 //
-//  determined.swift
-//  deferred
+//  outcome.swift
 //
 //  Created by Guillaume Lessard on 9/26/17.
 //  Copyright © 2017 Guillaume Lessard. All rights reserved.
 //
 
-public struct Determined<Value>
+public struct Outcome<Value>
 {
-  private let state: State<Value>
+  @usableFromInline let state: State<Value>
 
-  init(value: Value)
+  @inlinable
+  public init(value: Value)
   {
     state = .value(value)
   }
 
-  init(error: Error)
+  @inlinable
+  public init(error: Error)
   {
     state = .error(error)
   }
 
+  @inlinable
   public func get() throws -> Value
   {
     switch state
@@ -29,21 +31,25 @@ public struct Determined<Value>
     }
   }
 
+  @inlinable
   public var value: Value? {
     if case .value(let value) = state { return value }
     return nil
   }
 
+  @inlinable
   public var error: Error? {
     if case .error(let error) = state { return error }
     return nil
   }
 
+  @inlinable
   public var isValue: Bool {
     if case .value = state { return true }
     return false
   }
 
+  @inlinable
   public var isError: Bool {
     if case .error = state { return true }
     return false
@@ -51,9 +57,9 @@ public struct Determined<Value>
 }
 
 #if swift (>=4.1)
-extension Determined: Equatable where Value: Equatable
+extension Outcome: Equatable where Value: Equatable
 {
-  public static func ==(lhs: Determined, rhs: Determined) -> Bool
+  public static func ==(lhs: Outcome, rhs: Outcome) -> Bool
   {
     switch (lhs.state, rhs.state)
     {
@@ -69,7 +75,7 @@ extension Determined: Equatable where Value: Equatable
 #endif
 
 #if swift (>=4.2)
-extension Determined: Hashable where Value: Hashable
+extension Outcome: Hashable where Value: Hashable
 {
   public func hash(into hasher: inout Hasher)
   {
