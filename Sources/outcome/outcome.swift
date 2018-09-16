@@ -56,6 +56,17 @@ public struct Outcome<Value>
   }
 }
 
+extension Outcome: CustomStringConvertible
+{
+  public var description: String {
+    switch state
+    {
+    case .value(let value): return String(describing: value)
+    case .error(let error): return "Error: \(error)"
+    }
+  }
+}
+
 #if swift (>=4.1)
 extension Outcome: Equatable where Value: Equatable
 {
