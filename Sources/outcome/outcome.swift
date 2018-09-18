@@ -7,20 +7,41 @@
 
 public struct Outcome<Value>
 {
+#if swift(>=4.1.50)
   @usableFromInline let state: State<Value>
+#else
+  @_versioned let state: State<Value>
+#endif
 
+#if swift(>=4.1.50)
   @inlinable
   public init(value: Value)
   {
     state = .value(value)
   }
+#else
+  @inline(__always)
+  public init(value: Value)
+  {
+    state = .value(value)
+  }
+#endif
 
+#if swift(>=4.1.50)
   @inlinable
   public init(error: Error)
   {
     state = .error(error)
   }
+#else
+  @inline(__always)
+  public init(error: Error)
+  {
+    state = .error(error)
+  }
+#endif
 
+#if swift(>=4.1.50)
   @inlinable
   public func get() throws -> Value
   {
@@ -30,30 +51,89 @@ public struct Outcome<Value>
     case .error(let error): throw error
     }
   }
+#else
+  @inline(__always)
+  public func get() throws -> Value
+  {
+    switch state
+    {
+    case .value(let value): return value
+    case .error(let error): throw error
+    }
+  }
+#endif
 
-  @inlinable
+#if swift(>=4.1.50)
   public var value: Value? {
-    if case .value(let value) = state { return value }
-    return nil
+    @inlinable
+    get {
+      if case .value(let value) = state { return value }
+      return nil
+    }
   }
+#else
+  public var value: Value? {
+    @inline(__always)
+    get {
+      if case .value(let value) = state { return value }
+      return nil
+    }
+  }
+#endif
 
-  @inlinable
+#if swift(>=4.1.50)
   public var error: Error? {
-    if case .error(let error) = state { return error }
-    return nil
+    @inlinable
+    get {
+      if case .error(let error) = state { return error }
+      return nil
+    }
   }
+#else
+  public var error: Error? {
+    @inline(__always)
+    get {
+      if case .error(let error) = state { return error }
+      return nil
+    }
+  }
+#endif
 
-  @inlinable
+#if swift(>=4.1.50)
   public var isValue: Bool {
-    if case .value = state { return true }
-    return false
+    @inlinable
+    get {
+      if case .value = state { return true }
+      return false
+    }
   }
+#else
+  public var isValue: Bool {
+    @inline(__always)
+    get {
+      if case .value = state { return true }
+      return false
+    }
+  }
+#endif
 
-  @inlinable
+#if swift(>=4.1.50)
   public var isError: Bool {
-    if case .error = state { return true }
-    return false
+    @inlinable
+    get {
+      if case .error = state { return true }
+      return false
+    }
   }
+#else
+  public var isError: Bool {
+    @inline(__always)
+    get {
+      if case .error = state { return true }
+      return false
+    }
+  }
+#endif
 }
 
 extension Outcome: CustomStringConvertible
@@ -103,7 +183,7 @@ extension Outcome: Hashable where Value: Hashable
 }
 #endif
 
-#if swift (>=4.2)
+#if swift (>=4.1.50)
 @usableFromInline
 enum State<Value>
 {
