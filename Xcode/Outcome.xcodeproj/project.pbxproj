@@ -38,6 +38,7 @@
 		0358CBAF2152E03800F4B44B /* nzRandom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = nzRandom.swift; path = ../Tests/outcomeTests/nzRandom.swift; sourceTree = SOURCE_ROOT; };
 		0358CBB02152E03800F4B44B /* XCTestManifests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XCTestManifests.swift; path = ../../Tests/outcomeTests/XCTestManifests.swift; sourceTree = "<group>"; };
 		0358CBB62152E52000F4B44B /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = "<group>"; };
+		0358CBB72152E58300F4B44B /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; name = .travis.yml; path = ../.travis.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				0358CBB62152E52000F4B44B /* Package.swift */,
+				0358CBB72152E58300F4B44B /* .travis.yml */,
 				0312008E2152C95100F4B44B /* Outcome */,
 				031200992152C95100F4B44B /* OutcomeTests */,
 				0312008D2152C95100F4B44B /* Products */,
