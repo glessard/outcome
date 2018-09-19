@@ -4,27 +4,19 @@
 import PackageDescription
 
 #if !swift(>=4.2)
-let versions = [3,4]
+let versions = [4]
 #else
-let versions = [SwiftVersion.v3, .v4, .v4_2]
+let versions = [SwiftVersion.v4, .v4_2]
 #endif
 
-#if swift(>=4.0)
-
 let package = Package(
-  name: "outcome",
+  name: "Outcome",
   products: [
-    .library(name: "outcome", targets: ["outcome"]),
+    .library(name: "Outcome", targets: ["Outcome"]),
   ],
   targets: [
-    .target(name: "outcome", dependencies: []),
-    .testTarget(name: "outcomeTests", dependencies: ["outcome"]),
+    .target(name: "Outcome", dependencies: []),
+    .testTarget(name: "OutcomeTests", dependencies: ["Outcome"]),
   ],
   swiftLanguageVersions: versions
 )
-
-#else
-
-let package = Package(name: "outcome")
-
-#endif
