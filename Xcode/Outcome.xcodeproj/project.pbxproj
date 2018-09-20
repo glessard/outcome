@@ -107,7 +107,7 @@
 				0358CBAF2152E03800F4B44B /* nzRandom.swift */,
 				0358CBAD2152E03800F4B44B /* test-error.swift */,
 			);
-			path = Helpers;
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
