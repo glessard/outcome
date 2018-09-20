@@ -1,8 +1,8 @@
 import XCTest
 
-import outcomeTests
+import OutcomeTests
 
 var tests = [XCTestCaseEntry]()
-tests += outcomeTests.__allTests()
+tests += OutcomeTests.__allTests()
 
 XCTMain(tests)
