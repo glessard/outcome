@@ -33,7 +33,6 @@ matrix:
       env: SWIFT_VERSION=4.2
 
 before_install:
-  - sudo /bin/bash Tests/install-clang.sh
   - chmod u+x Tests/install-swift.sh
   - . Tests/install-swift.sh
 
