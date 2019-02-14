@@ -136,6 +136,16 @@ public struct Outcome<Value>
 #endif
 }
 
+#if swift(>=5.0)
+extension Result where Failure == Swift.Error
+{
+  public init(_ outcome: Outcome<Success>)
+  {
+    self.init(catching: outcome.get)
+  }
+}
+#endif
+
 extension Outcome: CustomStringConvertible
 {
   public var description: String {

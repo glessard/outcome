@@ -57,6 +57,8 @@ class OutcomeTests: XCTestCase
     o4 = Outcome(error: TestError(i1))
     XCTAssert(o3 != o4)
     XCTAssert(o4 != Outcome(error: TestError(i2)))
+#else
+    print("Skipped for Swift <4.1")
 #endif
   }
 
@@ -69,6 +71,27 @@ class OutcomeTests: XCTestCase
     let set = Set([d1, d2])
 
     XCTAssert(set.contains(d1))
+#else
+    print("Skipped for Swift <4.2")
+#endif
+  }
+
+  func testResult() throws
+  {
+#if swift(>=5.0)
+    let i = nzRandom()
+    var r = Result(Outcome(value: i))
+    XCTAssertEqual(try r.get(), i)
+
+    r = Result(Outcome(error: TestError(i)))
+    do {
+      _ = try r.get()
+    }
+    catch let error as TestError {
+      XCTAssertEqual(error.error, i)
+    }
+#else
+    print("Skipped for Swift <5.0")
 #endif
   }
 }
