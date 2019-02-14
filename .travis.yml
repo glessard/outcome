@@ -36,7 +36,7 @@ matrix:
 
     - os: osx
       osx_image: xcode10.2
-      env: SWIFT=5.0 VERSION=5
+      env: SWIFT=5.0
 
 before_install:
   - clang --version

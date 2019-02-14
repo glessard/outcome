@@ -1,4 +1,4 @@
-// swift-tools-version:4.0
+// swift-tools-version:4.2
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -12,5 +12,5 @@ let package = Package(
     .target(name: "Outcome", dependencies: []),
     .testTarget(name: "OutcomeTests", dependencies: ["Outcome"]),
   ],
-  swiftLanguageVersions: [4]
+  swiftLanguageVersions: [.v4, .v4_2, .version("5")]
 )
