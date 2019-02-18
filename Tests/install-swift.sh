@@ -3,15 +3,10 @@ set -e
 
 if [[ -n "$SWIFT" ]]
 then
-  if [[ -n "$VERSION" ]]
-  then
-    export SWIFT_LANGUAGE_VERSION="${VERSION}"
-  fi
-  export SWIFT_MAJOR_VERSION=`echo $SWIFT | awk -F . '{print $1}'`
-  export SWIFT_COMPILER_VERSION=$SWIFT
+  export COMPILER_VERSION=$SWIFT
 
-  COMPILER="swift-${SWIFT_COMPILER_VERSION}-RELEASE"
-  BRANCH="swift-${SWIFT_COMPILER_VERSION}-release"
+  COMPILER="swift-${COMPILER_VERSION}-RELEASE"
+  BRANCH="swift-${COMPILER_VERSION}-release"
   URLBASE="https://swift.org/builds/${BRANCH}"
 
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]
@@ -29,7 +24,6 @@ then
 elif [[ -z $(which swift) ]]
 then
   echo "Set SWIFT to define which compiler version to install"
-  echo "Set VERSION to define which (non-default) language version to compile with"
   exit 1
 fi
 
