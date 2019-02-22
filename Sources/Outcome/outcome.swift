@@ -157,7 +157,7 @@ extension Outcome: CustomStringConvertible
   }
 }
 
-#if swift (>=4.1)
+#if swift(>=4.1)
 extension Outcome: Equatable where Value: Equatable
 {
   public static func ==(lhs: Outcome, rhs: Outcome) -> Bool
@@ -175,7 +175,7 @@ extension Outcome: Equatable where Value: Equatable
 }
 #endif
 
-#if swift (>=4.2)
+#if swift(>=4.1.50)
 extension Outcome: Hashable where Value: Hashable
 {
   public func hash(into hasher: inout Hasher)
@@ -193,7 +193,7 @@ extension Outcome: Hashable where Value: Hashable
 }
 #endif
 
-#if swift (>=4.1.50)
+#if swift(>=4.1.50)
 @usableFromInline
 enum State<Value>
 {

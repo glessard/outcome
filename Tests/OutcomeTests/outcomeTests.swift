@@ -64,7 +64,7 @@ class OutcomeTests: XCTestCase
 
   func testHashable()
   {
-#if swift(>=4.2)
+#if swift(>=4.1.50)
     let d1 = Outcome<Int>(value: nzRandom())
     let d2 = Outcome<Int>(error: TestError(nzRandom()))
 

@@ -6,7 +6,7 @@
 //  Copyright © 2016 Guillaume Lessard. All rights reserved.
 //
 
-#if swift(>=4.2)
+#if swift(>=4.1.50)
 
 func nzRandom() -> Int
 {
