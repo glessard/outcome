@@ -203,7 +203,7 @@ enum State<Value>
 #else
 enum State<Value>
 {
-case value(Value)
-case error(Error)
+  case value(Value)
+  case error(Error)
 }
 #endif
