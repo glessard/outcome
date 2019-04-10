@@ -77,8 +77,8 @@
 		03CD0E07217A463700F4B44B = {
 			isa = PBXGroup;
 			children = (
-				03CD0E2B217A46A900F4B44B /* Package@swift-4.swift */,
 				0357CD362214C04200F4B44B /* Package.swift */,
+				03CD0E2B217A46A900F4B44B /* Package@swift-4.swift */,
 				03CD0E2D217A46C000F4B44B /* .travis.yml */,
 				0357CD312214BB8E00F4B44B /* Scripts */,
 				03CD0E13217A463700F4B44B /* Outcome */,
