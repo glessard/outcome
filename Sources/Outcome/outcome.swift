@@ -151,7 +151,7 @@ extension Outcome: CustomStringConvertible
   public var description: String {
     switch state
     {
-    case .value(let value): return String(describing: value)
+    case .value(let value): return "Value: " + String(describing: value)
     case .error(let error): return "Error: \(error)"
     }
   }

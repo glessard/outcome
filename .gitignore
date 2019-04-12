@@ -21,10 +21,8 @@ DerivedData
 contents.xcworkspacedata
 
 # swiftpm
-deferred.xcodeproj
+/*.xcodeproj
 .build
 Packages
 Package.pins
 Package.resolved
-
-/Outcome.xcodeproj

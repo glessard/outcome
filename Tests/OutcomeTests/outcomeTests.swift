@@ -42,6 +42,19 @@ class OutcomeTests: XCTestCase
     XCTAssertFalse(detError.isValue)
   }
 
+  func testDescription()
+  {
+    let i1 = nzRandom()
+    let o1 = Outcome(value: i1)
+    let d1 = String(describing: o1)
+    XCTAssert(d1.contains(String(describing: i1)))
+
+    let e2 = TestError(nzRandom())
+    let o2 = Outcome<Unicode.Scalar>(error: e2)
+    let d2 = String(describing: o2)
+    XCTAssert(d2.contains(String(describing: e2)))
+  }
+
   func testEquals()
   {
 #if swift(>=4.1)
