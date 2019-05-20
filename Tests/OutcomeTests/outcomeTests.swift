@@ -57,7 +57,6 @@ class OutcomeTests: XCTestCase
 
   func testEquals()
   {
-#if swift(>=4.1)
     let i1 = nzRandom()
     let i2 = nzRandom()
     let i3 = i1*i2
@@ -70,28 +69,21 @@ class OutcomeTests: XCTestCase
     o4 = Outcome(error: TestError(i1))
     XCTAssert(o3 != o4)
     XCTAssert(o4 != Outcome(error: TestError(i2)))
-#else
-    print("Skipped for Swift <4.1")
-#endif
   }
 
   func testHashable()
   {
-#if swift(>=4.1.50)
     let d1 = Outcome<Int>(value: nzRandom())
     let d2 = Outcome<Int>(error: TestError(nzRandom()))
 
     let set = Set([d1, d2])
 
     XCTAssert(set.contains(d1))
-#else
-    print("Skipped for Swift <4.2")
-#endif
   }
 
   func testResult() throws
   {
-#if swift(>=5.0)
+#if compiler(>=5.0)
     let i = nzRandom()
     var r = Result(Outcome(value: i))
     XCTAssertEqual(try r.get(), i)
