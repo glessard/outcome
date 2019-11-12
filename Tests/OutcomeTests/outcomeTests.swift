@@ -16,8 +16,8 @@ class OutcomeTests: XCTestCase
     let v1 = nzRandom()
     let v2 = nzRandom()
 
-    let detValue = Outcome<Int>(value: v1)
-    let detError = Outcome<Int>(error: TestError(v2))
+    let detValue = Outcome<Int, TestError>(value: v1)
+    let detError = Outcome<Int, TestError>(error: TestError(v2))
 
     do {
       let v = try detValue.get()
@@ -45,12 +45,12 @@ class OutcomeTests: XCTestCase
   func testDescription()
   {
     let i1 = nzRandom()
-    let o1 = Outcome(value: i1)
+    let o1 = Outcome<Int, TestError>(value: i1)
     let d1 = String(describing: o1)
     XCTAssert(d1.contains(String(describing: i1)))
 
     let e2 = TestError(nzRandom())
-    let o2 = Outcome<Unicode.Scalar>(error: e2)
+    let o2 = Outcome<Unicode.Scalar, AnyError>(error: e2)
     let d2 = String(describing: o2)
     XCTAssert(d2.contains(String(describing: e2)))
   }
@@ -61,9 +61,9 @@ class OutcomeTests: XCTestCase
     let i2 = nzRandom()
     let i3 = i1*i2
 
-    let o3 = Outcome(value: i1*i2)
-    XCTAssert(o3 == Outcome(value: i3))
-    XCTAssert(o3 != Outcome(value: i2))
+    let o3 = Outcome<Int, AnyError>(value: i1*i2)
+    XCTAssert(o3 == Outcome<Int, AnyError>(value: i3))
+    XCTAssert(o3 != Outcome<Int, AnyError>(value: i2))
 
     var o4 = o3
     o4 = Outcome(error: TestError(i1))
@@ -73,8 +73,8 @@ class OutcomeTests: XCTestCase
 
   func testHashable()
   {
-    let d1 = Outcome<Int>(value: nzRandom())
-    let d2 = Outcome<Int>(error: TestError(nzRandom()))
+    let d1 = Outcome<Int, TestError>(value: nzRandom())
+    let d2 = Outcome<Int, TestError>(error: TestError(nzRandom()))
 
     let set = Set([d1, d2])
 
