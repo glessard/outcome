@@ -79,7 +79,26 @@ extension Outcome where Failure == AnyError
   @inlinable
   public init(error: Error)
   {
-    state = .error(AnyError(error))
+    let wrapped = AnyError(error)
+    state = .error(wrapped)
+  }
+
+  public var error: Error? {
+    @inlinable
+    get {
+      if case .error(let wrapped) = state { return wrapped.error }
+      return nil
+    }
+  }
+
+  @inlinable
+  public func get() throws -> Success
+  {
+    switch state
+    {
+    case .value(let value):   return value
+    case .error(let wrapped): throw wrapped.error
+    }
   }
 }
 
