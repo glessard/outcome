@@ -5,7 +5,7 @@ extension OutcomeTests {
         ("testEquals", testEquals),
         ("testGetters", testGetters),
         ("testHashable", testHashable),
-        ("testResult", testResult),
+        ("testDescription", testDescription),
     ]
 }
 

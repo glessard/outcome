@@ -83,16 +83,6 @@ extension Outcome where Failure == AnyError
   }
 }
 
-#if compiler(>=5.0)
-extension Result where Failure == Swift.Error
-{
-  public init(_ outcome: Outcome<Success, AnyError>)
-  {
-    self.init(catching: outcome.get)
-  }
-}
-#endif
-
 extension Outcome: CustomStringConvertible
 {
   public var description: String {

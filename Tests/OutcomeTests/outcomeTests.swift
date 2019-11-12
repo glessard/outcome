@@ -80,23 +80,4 @@ class OutcomeTests: XCTestCase
 
     XCTAssert(set.contains(d1))
   }
-
-  func testResult() throws
-  {
-#if compiler(>=5.0)
-    let i = nzRandom()
-    var r = Result(Outcome(value: i))
-    XCTAssertEqual(try r.get(), i)
-
-    r = Result(Outcome(error: TestError(i)))
-    do {
-      _ = try r.get()
-    }
-    catch let error as TestError {
-      XCTAssertEqual(error.error, i)
-    }
-#else
-    print("Skipped for Swift <5.0")
-#endif
-  }
 }
