@@ -5,24 +5,24 @@
 //  Copyright © 2017 Guillaume Lessard. All rights reserved.
 //
 
-public struct Outcome<Value>
+public struct Outcome<Success, Failure: Error>
 {
-  @usableFromInline let state: State<Value>
+  @usableFromInline let state: State<Success, Failure>
 
   @inlinable
-  public init(value: Value)
+  public init(value: Success)
   {
     state = .value(value)
   }
 
   @inlinable
-  public init(error: Error)
+  public init(error: Failure)
   {
     state = .error(error)
   }
 
   @inlinable
-  public func get() throws -> Value
+  public func get() throws -> Success
   {
     switch state
     {
@@ -31,7 +31,7 @@ public struct Outcome<Value>
     }
   }
 
-  public var value: Value? {
+  public var value: Success? {
     @inlinable
     get {
       if case .value(let value) = state { return value }
@@ -39,7 +39,7 @@ public struct Outcome<Value>
     }
   }
 
-  public var error: Error? {
+  public var error: Failure? {
     @inlinable
     get {
       if case .error(let error) = state { return error }
@@ -64,10 +64,29 @@ public struct Outcome<Value>
   }
 }
 
+public struct AnyError: Error
+{
+  public var error: Error
+
+  public init(_ error: Error)
+  {
+    self.error = error
+  }
+}
+
+extension Outcome where Failure == AnyError
+{
+  @inlinable
+  public init(error: Error)
+  {
+    state = .error(AnyError(error))
+  }
+}
+
 #if compiler(>=5.0)
 extension Result where Failure == Swift.Error
 {
-  public init(_ outcome: Outcome<Success>)
+  public init(_ outcome: Outcome<Success, AnyError>)
   {
     self.init(catching: outcome.get)
   }
@@ -79,13 +98,13 @@ extension Outcome: CustomStringConvertible
   public var description: String {
     switch state
     {
-    case .value(let value): return "Value: " + String(describing: value)
-    case .error(let error): return "Error: \(error)"
+    case .value(let value): return "Success: " + String(describing: value)
+    case .error(let error): return "Failure: \(error)"
     }
   }
 }
 
-extension Outcome: Equatable where Value: Equatable
+extension Outcome: Equatable where Success: Equatable
 {
   public static func ==(lhs: Outcome, rhs: Outcome) -> Bool
   {
@@ -101,7 +120,7 @@ extension Outcome: Equatable where Value: Equatable
   }
 }
 
-extension Outcome: Hashable where Value: Hashable
+extension Outcome: Hashable where Success: Hashable
 {
   public func hash(into hasher: inout Hasher)
   {
@@ -118,8 +137,8 @@ extension Outcome: Hashable where Value: Hashable
 }
 
 @usableFromInline
-enum State<Value>
+enum State<Success, Failure>
 {
-  case value(Value)
-  case error(Error)
+  case value(Success)
+  case error(Failure)
 }
